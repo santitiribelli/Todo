@@ -1,0 +1,47 @@
+<article class="container">
+  <section class="create" *ngIf="isCreate">
+    <h1>Create Todo</h1>
+    <form>
+      <div class="mb-3">
+        <label for="name">Descripcion</label>
+        <input type="text" class="form-control" id="descripcion" name="descripcion" 
+        placeholder="Ingrese la descripcion de la tarea" [(ngModel)]="descripcion">
+      </div>
+      <div class="mb-3">
+        <label for="address">Estado</label>
+        <input type="text" class="form-control" id="estado" name="estado" 
+        placeholder="Ingrese el estado de la tarea" [(ngModel)]="estado">
+      </div>
+      <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+      <div class="row">
+        <div class="offset-md-5 col-md-2">
+          <button type="button" class="btn btn-primary" (click)="onCreate()">Create </button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <section class="todos" *ngIf="!isCreate">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Image</th>
+          <th scope="col">Descripcion</th>
+          <th scope="col">Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let todo of todos">
+          <td><img [src]="createImgPath(todo.imgPath)" alt="profile picture" style="width:60px; height:60px;"></td>
+          <td>{{todo.descripcion}}</td>
+          <td>{{todo.estado}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="offset-md-10 col-md-2">
+        <button type="button" class="btn btn-primary" (click)="returnToCreate()">New Todo</button>
+      </div>
+    </div>
+  </section>
+</article>
